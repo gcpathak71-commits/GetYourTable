@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get Your Table — AI Recommendation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg">
+    <div class="container">
+        <h1 class="title">🍽 Get Your Table — AI Recommendation & Booking</h1>
+        <form method="POST" action="{{ url_for('index') }}">
+            <label>City</label>
+            <select name="city" required>
+                {% for city in cities %}
+                <option>{{ city }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Cuisine</label>
+            <select name="cuisine" required>
+                {% for cuisine in cuisines %}
+                <option>{{ cuisine }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Veg / Non-Veg</label>
+            <select name="veg_type">
+                {% for v in veg_types %}
+                <option>{{ v }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Budget</label>
+            <select name="price_range">
+                {% for p in price_ranges %}
+                <option>{{ p }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Occasion (optional)</label>
+            <select name="occasion">
+                {% for o in occasions %}
+                <option value="{{ o }}">{{ o if o else "No preference" }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Phone (optional — improves future recommendations)</label>
+            <input type="text" name="phone" placeholder="For personalized picks">
+
+            <button type="submit" class="btn">Find My Table 🤖</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg">
+    <div class="container wide">
+        <h1 class="title">Top Picks in {{ city }} for {{ cuisine }}</h1>
+
+        {% if recommendations %}
+            {% for r in recommendations %}
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="highlight">{{ r.name }}</h2>
+                    <span class="score">🤖 {{ r.match_score }}% match</span>
+                </div>
+                <p><b>Cuisine:</b> {{ r.cuisine }} &nbsp; | &nbsp; <b>Rating:</b> ⭐ {{ r.rating }} &nbsp; | &nbsp; <b>Budget:</b> {{ r.price_range }} ({{ r.price_display }}) &nbsp; | &nbsp; <b>{{ r.veg_type }}</b></p>
+                <p><b>Tags:</b> {{ r.tags | join(", ") }}</p>
+                <p><b>Location:</b> {{ r.address }}</p>
+
+                <iframe
+                    width="100%" height="220" style="border:0; border-radius: 12px; margin-top: 10px;"
+                    loading="lazy" allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps?q={{ r.address | urlencode }}&output=embed">
+                </iframe>
+
+                <a href="{{ url_for('reserve', restaurant=r.name, city=city, cuisine=r.cuisine) }}" class="btn">Reserve a Table</a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No matching restaurants found for this combination. Try a different city or cuisine.</p>
+        {% endif %}
+
+        <a href="{{ url_for('index') }}" class="btn secondary">🔙 Back</a>
+    </div>
+</body>
+</html>

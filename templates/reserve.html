@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reserve Table</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg">
+    <div class="container">
+        <h1 class="title">Reserve Table at {{ restaurant }}</h1>
+        <form method="POST">
+            <input type="hidden" name="city" value="{{ city }}">
+            <input type="hidden" name="cuisine" value="{{ cuisine }}">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="text" name="phone" placeholder="Phone Number" required>
+            <input type="date" name="date" required>
+            <input type="time" name="time" required>
+            <input type="number" name="people" placeholder="No. of People" required>
+            <button type="submit" class="btn">Confirm Reservation</button>
+        </form>
+    </div>
+</body>
+</html>

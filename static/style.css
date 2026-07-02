@@ -1,0 +1,107 @@
+body.bg {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px 0;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 400px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.container.wide {
+    width: 560px;
+    max-width: 90vw;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #ff416c;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+form label {
+    display: block;
+    text-align: left;
+    font-size: 13px;
+    color: #666;
+    margin-top: 8px;
+}
+
+.btn {
+    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.btn.secondary {
+    background: #999;
+    margin-top: 20px;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.highlight {
+    font-size: 20px;
+    color: #ff4b2b;
+    margin: 0;
+}
+
+.card {
+    background: #fff8f6;
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 18px;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.score {
+    background: #ff416c;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
