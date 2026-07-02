@@ -1,5 +1,7 @@
 # Get Your Table — AI/ML Edition
 
+Live demo: https://chubby-waves-greet.loca.lt
+
 An upgraded version of the original "Get Your Table" project. The old
 recommender just did `random.choice()` over restaurants that matched the
 city + cuisine filters. This version replaces that with a real, explainable
