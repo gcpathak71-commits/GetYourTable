@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import sqlite3
+from urllib.parse import quote, unquote
 from recommendor import ContentRecommender
 import uuid
 import os
@@ -110,8 +111,10 @@ def index():
     )
 
 
-@app.route("/reserve/<restaurant>", methods=["GET", "POST"])
-def reserve(restaurant):
+@app.route("/reserve", methods=["GET", "POST"])
+def reserve():
+    restaurant = request.args.get("restaurant", "")
+    restaurant_name = unquote(restaurant) if restaurant else ""
     city = request.args.get("city", "")
     cuisine = request.args.get("cuisine", "")
 
@@ -129,7 +132,7 @@ def reserve(restaurant):
             """INSERT INTO reservations
                (id, restaurant, name, phone, date, time, people, cuisine, city)
                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-            (str(uuid.uuid4()), restaurant, name, phone, date, time, people, cuisine, city),
+            (str(uuid.uuid4()), restaurant_name, name, phone, date, time, people, cuisine, city),
         )
         conn.commit()
         conn.close()
@@ -137,17 +140,19 @@ def reserve(restaurant):
         # Implicit feedback: a real booking increases this restaurant's
         # popularity signal for future recommendations.
         if city:
-            reco.bump_popularity(restaurant, city)
+            reco.bump_popularity(restaurant_name, city)
 
         flash("Reservation successful!")
-        return redirect(url_for("success", restaurant=restaurant))
+        return redirect(url_for("success", restaurant=quote(restaurant_name, safe="")))
 
-    return render_template("reserve.html", restaurant=restaurant, city=city, cuisine=cuisine)
+    return render_template("reserve.html", restaurant=restaurant_name, city=city, cuisine=cuisine)
 
 
-@app.route("/success/<restaurant>")
-def success(restaurant):
-    return render_template("success.html", restaurant=restaurant)
+@app.route("/success")
+def success():
+    restaurant = request.args.get("restaurant", "")
+    restaurant_name = unquote(restaurant) if restaurant else ""
+    return render_template("success.html", restaurant=restaurant_name)
 
 
 if __name__ == "__main__":

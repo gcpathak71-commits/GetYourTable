@@ -27,7 +27,7 @@
                     src="https://www.google.com/maps?q={{ r.address | urlencode }}&output=embed">
                 </iframe>
 
-                <a href="{{ url_for('reserve', restaurant=r.name, city=city, cuisine=r.cuisine) }}" class="btn">Reserve a Table</a>
+                <a href="{{ url_for('reserve', restaurant=r.name|urlencode, city=city, cuisine=r.cuisine) }}" class="btn">Reserve a Table</a>
             </div>
             {% endfor %}
         {% else %}
