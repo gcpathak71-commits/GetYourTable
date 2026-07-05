@@ -1,6 +1,6 @@
 # Get Your Table — AI/ML Edition
 
-Live demo: https://chubby-waves-greet.loca.lt
+Live demo: https:https://get-your-table.vercel.app/
 
 An upgraded version of the original "Get Your Table" project. The old
 recommender just did `random.choice()` over restaurants that matched the
