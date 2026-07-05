@@ -2,29 +2,7 @@
 
 Live demo: https:https://get-your-table.vercel.app/
 
-An upgraded version of the original "Get Your Table" project. The old
-recommender just did `random.choice()` over restaurants that matched the
-city + cuisine filters. This version replaces that with a real, explainable
-machine-learning recommendation pipeline:
 
-## What changed
-
-1. **Richer data** — every restaurant now also has a `rating`, `price_range`
-   (`$`/`$$`/`$$$`), `veg_type`, and descriptive `tags` (romantic, rooftop,
-   budget-friendly, etc.), plus a `popularity` counter.
-2. **Content-based filtering** — restaurant profiles and the user's request
-   are vectorized with TF-IDF (`scikit-learn`), and ranked by cosine
-   similarity.
-3. **Weighted scoring** — final ranking blends similarity (55%), normalized
-   rating (30%), and normalized popularity (15%) into one `match_score`.
-4. **Lightweight collaborative filtering** — if a phone number is supplied,
-   the app checks the user's past reservations and boosts restaurants that
-   share a cuisine with what they've booked before.
-5. **Feedback loop** — every confirmed reservation increments that
-   restaurant's `popularity`, so the model's rankings adapt over time based
-   on real bookings.
-6. **UI** — the results page now shows the top 3 ranked matches with a
-   match-score badge instead of a single random pick.
 
 ## Project structure
 
